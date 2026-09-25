@@ -1,0 +1,12 @@
+{
+  "event_id": "092507-007-sample-001",
+  "event_type": "ENTRY_ADDED",
+  "aggregate_type": "experience_album",
+  "aggregate_id": "experience_album_freshness-001",
+  "occurred_at": "2026-09-24T12:00:00+08:00",
+  "version": 1,
+  "payload": {
+    "experience_at": "sample-experience_at",
+    "audience_conditions": "sample-audience_conditions"
+  }
+}

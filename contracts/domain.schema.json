@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "生活经验专辑时效台领域事件",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_type",
+    "aggregate_type",
+    "aggregate_id",
+    "occurred_at",
+    "version",
+    "payload"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "ENTRY_ADDED",
+        "SNAPSHOT_SHARED",
+        "PLACE_CHANGED",
+        "CORRECTION_DECIDED",
+        "AUTHOR_WITHDREW"
+      ]
+    },
+    "aggregate_type": {
+      "type": "string",
+      "enum": [
+        "experience_album",
+        "place_revision",
+        "shared_snapshot",
+        "correction_case"
+      ]
+    },
+    "aggregate_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "payload_required_by_event": {
+    "ENTRY_ADDED": [
+      "experience_at",
+      "audience_conditions"
+    ],
+    "SNAPSHOT_SHARED": [
+      "snapshot_hash",
+      "recipient_scope"
+    ],
+    "PLACE_CHANGED": [
+      "place_version",
+      "changed_facts"
+    ]
+  },
+  "additionalProperties": false
+}
