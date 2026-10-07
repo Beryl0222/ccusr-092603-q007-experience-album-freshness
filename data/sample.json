@@ -1,12 +1,17 @@
 {
   "event_id": "092507-007-sample-001",
+  "request_id": "092507-007-sample-request-001",
   "event_type": "ENTRY_ADDED",
   "aggregate_type": "experience_album",
   "aggregate_id": "experience_album_freshness-001",
   "occurred_at": "2026-09-24T12:00:00+08:00",
-  "version": 1,
+  "version": 2,
   "payload": {
-    "experience_at": "sample-experience_at",
-    "audience_conditions": "sample-audience_conditions"
+    "entry_id": "entry-001",
+    "place_id": "place-smoke-free-cafe-001",
+    "author_id": "user-zhang",
+    "experience_at": "2026-09-22T19:30:00+08:00",
+    "recommendation": "无烟区安静，适合带电脑久坐",
+    "audience_conditions": ["独自前往", "需要电源插座"]
   }
 }

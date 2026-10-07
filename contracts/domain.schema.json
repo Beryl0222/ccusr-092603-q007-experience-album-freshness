@@ -4,6 +4,7 @@
   "type": "object",
   "required": [
     "event_id",
+    "request_id",
     "event_type",
     "aggregate_type",
     "aggregate_id",
@@ -16,14 +17,27 @@
       "type": "string",
       "minLength": 1
     },
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "调用方幂等键：同一 request_id 的请求只执行一次"
+    },
     "event_type": {
       "type": "string",
       "enum": [
+        "ALBUM_CREATED",
+        "COLLABORATOR_ADDED",
         "ENTRY_ADDED",
+        "ENTRY_UPDATED",
+        "ENTRY_FROZEN",
+        "AUTHOR_WITHDREW",
+        "COMMENT_CITED",
         "SNAPSHOT_SHARED",
+        "PLACE_REGISTERED",
         "PLACE_CHANGED",
-        "CORRECTION_DECIDED",
-        "AUTHOR_WITHDREW"
+        "PLACE_MERGED",
+        "CORRECTION_SUBMITTED",
+        "CORRECTION_DECIDED"
       ]
     },
     "aggregate_type": {
@@ -52,17 +66,76 @@
     }
   },
   "payload_required_by_event": {
+    "ALBUM_CREATED": [
+      "title",
+      "owner_id"
+    ],
+    "COLLABORATOR_ADDED": [
+      "user_id",
+      "added_by"
+    ],
     "ENTRY_ADDED": [
+      "entry_id",
+      "place_id",
+      "author_id",
       "experience_at",
+      "recommendation",
       "audience_conditions"
+    ],
+    "ENTRY_UPDATED": [
+      "entry_id",
+      "place_id",
+      "author_id",
+      "experience_at",
+      "recommendation",
+      "audience_conditions",
+      "endorsed"
+    ],
+    "ENTRY_FROZEN": [
+      "entry_id",
+      "reason"
+    ],
+    "AUTHOR_WITHDREW": [
+      "entry_id",
+      "reason"
+    ],
+    "COMMENT_CITED": [
+      "comment_id",
+      "entry_id",
+      "author_id",
+      "quoted_text"
     ],
     "SNAPSHOT_SHARED": [
       "snapshot_hash",
-      "recipient_scope"
+      "recipient_scope",
+      "entries"
+    ],
+    "PLACE_REGISTERED": [
+      "place_id",
+      "name",
+      "facts"
     ],
     "PLACE_CHANGED": [
       "place_version",
       "changed_facts"
+    ],
+    "PLACE_MERGED": [
+      "surviving_place_id",
+      "merged_place_id",
+      "migrated_citations"
+    ],
+    "CORRECTION_SUBMITTED": [
+      "case_id",
+      "place_id",
+      "album_id",
+      "submitter_id",
+      "submitter_role",
+      "fact_patch"
+    ],
+    "CORRECTION_DECIDED": [
+      "case_id",
+      "decided_by",
+      "decision"
     ]
   },
   "additionalProperties": false
