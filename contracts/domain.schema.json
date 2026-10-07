@@ -19,11 +19,19 @@
     "event_type": {
       "type": "string",
       "enum": [
+        "ALBUM_CREATED",
         "ENTRY_ADDED",
-        "SNAPSHOT_SHARED",
+        "ENTRY_UPDATED",
+        "ENTRY_MERGE_RESOLVED",
+        "PLACE_REGISTERED",
         "PLACE_CHANGED",
+        "PLACE_MERGED",
+        "SNAPSHOT_SHARED",
+        "COMMENT_ADDED",
+        "CORRECTION_SUBMITTED",
         "CORRECTION_DECIDED",
-        "AUTHOR_WITHDREW"
+        "AUTHOR_WITHDREW",
+        "COLLABORATOR_INVITED"
       ]
     },
     "aggregate_type": {
@@ -52,9 +60,21 @@
     }
   },
   "payload_required_by_event": {
+    "ALBUM_CREATED": [],
     "ENTRY_ADDED": [
       "experience_at",
       "audience_conditions"
+    ],
+    "ENTRY_UPDATED": [
+      "entry_id"
+    ],
+    "ENTRY_MERGE_RESOLVED": [
+      "entry_id",
+      "base_version"
+    ],
+    "PLACE_REGISTERED": [
+      "place_id",
+      "place_version"
     ],
     "SNAPSHOT_SHARED": [
       "snapshot_hash",
@@ -63,6 +83,32 @@
     "PLACE_CHANGED": [
       "place_version",
       "changed_facts"
+    ],
+    "PLACE_MERGED": [
+      "old_place_id",
+      "new_place_id"
+    ],
+    "COMMENT_ADDED": [
+      "comment_id",
+      "entry_id",
+      "quote",
+      "place_id",
+      "place_version"
+    ],
+    "CORRECTION_SUBMITTED": [
+      "case_id",
+      "subject_id",
+      "factual_patches"
+    ],
+    "CORRECTION_DECIDED": [
+      "case_id",
+      "decision"
+    ],
+    "AUTHOR_WITHDREW": [
+      "entry_id"
+    ],
+    "COLLABORATOR_INVITED": [
+      "user_id"
     ]
   },
   "additionalProperties": false
